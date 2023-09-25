@@ -1,5 +1,6 @@
 package com.example.githubimam.data.retrofit
 
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,10 +11,16 @@ class ApiConfig {
 
     companion object{
         fun getApiService() : ApiService{
-            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            val authInterceptor = Interceptor { chain ->
+                val req = chain.request()
+                val requestHeaders = req.newBuilder()
+                    .addHeader("Authorization", "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")
+                    .build()
+                chain.proceed(requestHeaders)
+            }
 
             val client = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
+                .addInterceptor(authInterceptor)
                 .build()
 
             val retrofit = Retrofit.Builder()

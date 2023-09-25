@@ -1,4 +1,6 @@
-package com.example.githubimam
+package com.example.githubimam.detail_user.adapter
+
+
 
 
 import android.content.Intent
@@ -10,50 +12,31 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.githubimam.data.response.DetailUserResponse
 import com.example.githubimam.data.response.ItemsItem
 import com.example.githubimam.databinding.ItemUserBinding
 import com.example.githubimam.detail_user.DetailUserActivity
 
 
-class MainAdapter: ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK){
+class FollowersAdapter: ListAdapter<DetailUserResponse, FollowersAdapter.ViewHolder> (DIFF_CALLBACK){
 
-
-
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowersAdapter.ViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
 
 
-    override fun onBindViewHolder(holder: MainAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FollowersAdapter.ViewHolder, position: Int) {
         val users = getItem(position)
         holder.bind(users)
-        holder.itemView.setOnClickListener{
-
-
-            val intent = Intent(holder.itemView.context, DetailUserActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString(NAME, users.login)
-            bundle.putString(AVATAR, users.avatarUrl)
-            intent.putExtras(bundle)
-            holder.itemView.context.startActivity(intent)
-        }
-
-
-
 
 
     }
 
     class ViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root){
 
-
-        fun bind(users: ItemsItem){
-
-
+        fun bind(users: DetailUserResponse){
 
             binding.profileName.text = users.login
             Glide.with(itemView.context)
@@ -75,12 +58,12 @@ class MainAdapter: ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK
     }
 
     companion object{
-        val DIFF_CALLBACK = object: DiffUtil.ItemCallback<ItemsItem>(){
-            override fun areItemsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
+        val DIFF_CALLBACK = object: DiffUtil.ItemCallback<DetailUserResponse>(){
+            override fun areItemsTheSame(oldItem: DetailUserResponse, newItem: DetailUserResponse): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
+            override fun areContentsTheSame(oldItem: DetailUserResponse, newItem: DetailUserResponse): Boolean {
                 return oldItem == newItem
             }
 

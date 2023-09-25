@@ -3,11 +3,12 @@ package com.example.githubimam
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubimam.data.MainViewModel
+import com.example.githubimam.detail_user.viewmodel.MainViewModel
 
 import com.example.githubimam.data.response.ItemsItem
 
@@ -28,9 +29,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        showLoading(true)
+
         supportActionBar?.hide()
 
         mainViewModel.githubUser.observe(this, { user ->
+
+            if (user != null) {
+                showLoading(false)
+            }
             setUserData(user)
         })
 
@@ -80,6 +87,14 @@ class MainActivity : AppCompatActivity() {
         adapter.submitList(userData)
         binding.rvUser.adapter = adapter
 
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
 
