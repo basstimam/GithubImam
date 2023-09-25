@@ -1,11 +1,12 @@
 package com.example.githubimam.detail_user
 
-import androidx.appcompat.app.AppCompatActivity
+import FollowersFragment
+import android.R.attr.data
 import android.os.Bundle
-
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.githubimam.R
@@ -14,6 +15,7 @@ import com.example.githubimam.detail_user.adapter.SectionsPagerAdapter
 import com.example.githubimam.detail_user.viewmodel.DetailUserViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+
 
 class DetailUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailUserBinding
@@ -46,12 +48,14 @@ class DetailUserActivity : AppCompatActivity() {
         showLoading(true)
 
 
+
         val bundle = intent.extras
         if (bundle != null) {
             val username = bundle.getString("NAME")
 
             if (username != null) {
                 showLoading(false)
+
 
                 detailUserViewModel.detailUser.observe(this) { detailUser ->
 
@@ -68,7 +72,20 @@ class DetailUserActivity : AppCompatActivity() {
                 detailUserViewModel.getDetailUser(username)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             }
+
 
         }
     }
@@ -88,5 +105,7 @@ class DetailUserActivity : AppCompatActivity() {
             binding.detailProfileImg.visibility = View.VISIBLE
         }
     }
+
+
 
 }

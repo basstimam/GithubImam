@@ -1,20 +1,28 @@
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.githubimam.databinding.FragmentFollowersBinding
-import com.example.githubimam.detail_user.adapter.FollowersAdapter
-import com.example.githubimam.detail_user.viewmodel.FollowersViewmodel
-
+import com.example.githubimam.detail_user.DetailUserActivity
+import kotlin.math.log
 
 class FollowersFragment : Fragment() {
     private lateinit var binding: FragmentFollowersBinding
+    private val followersViewModel: FollowersViewModel by activityViewModels()
+    private val followersAdapter = FollowersAdapter()
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +36,38 @@ class FollowersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
+        observeFollowers()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
+
+    private fun setupRecyclerView() {
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvFollowers.layoutManager = layoutManager
+        val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
+        binding.rvFollowers.addItemDecoration(itemDecoration)
+        binding.rvFollowers.adapter = followersAdapter
+    }
+
+    private fun observeFollowers() {
+        followersViewModel.followers.observe(viewLifecycleOwner) { followers ->
+            followersAdapter.submitList(followers)
+        }
+    }
+
+
 }

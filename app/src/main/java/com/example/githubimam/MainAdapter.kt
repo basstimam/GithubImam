@@ -40,6 +40,13 @@ class MainAdapter: ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK
             bundle.putString(AVATAR, users.avatarUrl)
             intent.putExtras(bundle)
             holder.itemView.context.startActivity(intent)
+
+
+
+
+
+
+
         }
 
 

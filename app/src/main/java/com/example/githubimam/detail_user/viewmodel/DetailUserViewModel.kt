@@ -1,6 +1,7 @@
 package com.example.githubimam.detail_user.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.githubimam.data.response.DetailUserResponse
@@ -12,7 +13,13 @@ import retrofit2.Response
 class DetailUserViewModel: ViewModel() {
 
     private val _detailUser = MutableLiveData<DetailUserResponse>()
-    val detailUser: MutableLiveData<DetailUserResponse> = _detailUser
+    val detailUser: LiveData<DetailUserResponse> = _detailUser
+
+    private val _userName = MutableLiveData<String>()
+    val userName: LiveData<String> = _userName
+
+    private val _userAvatarUrl = MutableLiveData<String>()
+    val userAvatarUrl: LiveData<String> = _userAvatarUrl
 
     companion object{
 private const val TAG = "DetailUserViewModel"
@@ -42,7 +49,10 @@ private const val TAG = "DetailUserViewModel"
 
         })
     }
-
+    fun setData(userName: String, userAvatarUrl: String) {
+        _userName.value = userName
+        _userAvatarUrl.value = userAvatarUrl
+    }
 
 
 
