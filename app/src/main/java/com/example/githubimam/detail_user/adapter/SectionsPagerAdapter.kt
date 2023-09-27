@@ -1,13 +1,15 @@
 package com.example.githubimam.detail_user.adapter
 
 import FollowersFragment
+import FollowingFragment
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-import com.example.githubimam.detail_user.FollowingFragment
 
-class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
+
+class SectionsPagerAdapter(activity: AppCompatActivity, private val login : Bundle) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {
         return 2
     }
@@ -17,7 +19,10 @@ class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(a
         when (position) {
             0 -> fragment = FollowersFragment()
             1 -> fragment = FollowingFragment()
+
         }
+
+        fragment?.arguments = login
         return fragment as Fragment
 
     }

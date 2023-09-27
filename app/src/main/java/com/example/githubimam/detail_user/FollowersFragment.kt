@@ -17,12 +17,7 @@ class FollowersFragment : Fragment() {
     private val followersAdapter = FollowersAdapter()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +30,7 @@ class FollowersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        showLoading(true)
         setupRecyclerView()
         observeFollowers()
 
@@ -61,11 +56,31 @@ class FollowersFragment : Fragment() {
         val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
         binding.rvFollowers.addItemDecoration(itemDecoration)
         binding.rvFollowers.adapter = followersAdapter
+
+        val login = arguments?.getString("NAME")
+        if (login != null) {
+
+            followersViewModel.getFollowers(login)
+        }
+
+
     }
 
     private fun observeFollowers() {
         followersViewModel.followers.observe(viewLifecycleOwner) { followers ->
+
+            if (followers != null) {
+                showLoading(false)
+            }
             followersAdapter.submitList(followers)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 

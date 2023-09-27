@@ -31,12 +31,22 @@ class DetailUserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        showLoading(true)
+        val bundle = intent.extras
 
 
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this)
+        val login = Bundle()
+        login.putString("NAME", bundle?.getString("NAME"))
+
+
+
+
+        val sectionsPagerAdapter = SectionsPagerAdapter(this, login)
         val viewPager: ViewPager2 = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
@@ -45,19 +55,25 @@ class DetailUserActivity : AppCompatActivity() {
         }.attach()
         supportActionBar?.elevation = 0f
 
-        showLoading(true)
 
 
 
-        val bundle = intent.extras
+
+
         if (bundle != null) {
             val username = bundle.getString("NAME")
 
             if (username != null) {
-                showLoading(false)
+
+
+
 
 
                 detailUserViewModel.detailUser.observe(this) { detailUser ->
+                    if (detailUser != null) {
+                        showLoading(false)
+                    }
+
 
                     binding.detailProfileName.text = detailUser.name
                     binding.detailFollowers.text = detailUser.followers.toString() + " Followers"
