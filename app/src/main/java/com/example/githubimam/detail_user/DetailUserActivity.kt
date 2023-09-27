@@ -120,20 +120,13 @@ class DetailUserActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
-            binding.detailProfileName.visibility = View.GONE
-            binding.detailFollowers.visibility = View.GONE
-            binding.detailFollowing.visibility = View.GONE
-            binding.detailProfileImg.visibility = View.GONE
+            binding.wrapHeading.visibility = View.GONE
             binding.tabs.visibility = View.GONE
-            binding.detailUsername.visibility = View.GONE
         } else {
             binding.progressBar.visibility = View.GONE
-            binding.detailProfileName.visibility = View.VISIBLE
-            binding.detailFollowers.visibility = View.VISIBLE
-            binding.detailFollowing.visibility = View.VISIBLE
-            binding.detailProfileImg.visibility = View.VISIBLE
+            binding.wrapHeading.visibility = View.VISIBLE
             binding.tabs.visibility = View.VISIBLE
-            binding.detailUsername.visibility = View.VISIBLE
+
         }
     }
 

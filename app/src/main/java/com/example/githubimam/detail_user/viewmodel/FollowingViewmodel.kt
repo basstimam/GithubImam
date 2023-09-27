@@ -16,7 +16,7 @@ class FollowingViewmodel : ViewModel() {
     val following: LiveData<List<FollowingResponseItem>> = _following
 
     companion object {
-        private const val TAG = "FollowingViewModel"
+        const val TAG = "FollowingViewModel"
     }
 
     internal fun getFollowing(username: String) {

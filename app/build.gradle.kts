@@ -5,9 +5,13 @@ plugins {
 
 
 }
-
+object secret{
+    const val GITHUB_TOKEN = "\"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\""
+}
 
 android {
+
+
     namespace = "com.example.githubimam"
     compileSdk = 34
 
@@ -17,7 +21,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "KEY", "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")
+        buildConfigField("String", "KEY", secret.GITHUB_TOKEN)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

@@ -21,6 +21,8 @@ class DetailUserViewModel: ViewModel() {
     private val _userAvatarUrl = MutableLiveData<String>()
     val userAvatarUrl: LiveData<String> = _userAvatarUrl
 
+
+
     companion object{
 private const val TAG = "DetailUserViewModel"
     }
