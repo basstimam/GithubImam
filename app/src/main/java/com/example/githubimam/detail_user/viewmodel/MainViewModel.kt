@@ -18,6 +18,7 @@ class MainViewModel: ViewModel() {
 
 
 
+
     companion object {
         private const val TAG = "MainActivity"
         private const val SEARCH = "imam"
@@ -48,13 +49,22 @@ class MainViewModel: ViewModel() {
     }
 
     fun searchUser(query: String) {
+
+
+
+
         val client = ApiConfig.getApiService().getUsers(query)
 
         client.enqueue(object : Callback<GithubResponse> {
             override fun onResponse(call: Call<GithubResponse>, response: Response<GithubResponse>) {
                 if (response.isSuccessful) {
-                    _githubUser.value = response.body()?.items
-                    Log.d(TAG, response.body()?.items.toString())
+                    val githubResponse = response.body()
+                    val allUsers: List<ItemsItem>? = githubResponse?.items
+
+                    val filteredUsers = allUsers?.filter { it.login.contains(query, ignoreCase = true) } ?: emptyList()
+
+                    _githubUser.value = filteredUsers
+                    Log.d(TAG, filteredUsers.toString())
                 } else {
                     Log.d(TAG, "Response not successful")
                 }

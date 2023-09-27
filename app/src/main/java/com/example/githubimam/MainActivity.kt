@@ -1,6 +1,7 @@
 package com.example.githubimam
 
 
+import android.content.ClipData.Item
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -19,6 +20,7 @@ import com.example.githubimam.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+
     private val mainViewModel by viewModels<MainViewModel>()
 
 
@@ -31,17 +33,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         showLoading(true)
-
         supportActionBar?.hide()
+        setupMain()
 
+
+
+
+    }
+
+
+
+
+    private fun setupMain(){
         mainViewModel.githubUser.observe(this, { user ->
-
             if (user != null) {
+
                 showLoading(false)
             }
+
             setUserData(user)
         })
-
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
 
@@ -49,12 +60,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvUser.addItemDecoration(itemDecoration)
 
 
-
-
-
-
         with(binding) {
-
             searchView.setupWithSearchBar(searchBar)
             searchView
                 .editText
@@ -62,28 +68,26 @@ class MainActivity : AppCompatActivity() {
                     searchBar.text = searchView.text
                     val search = searchView.text
                     searchView.hide()
+
                     performSearch(search.toString())
                     false
                 }
-
-
         }
-
-
-
-
-
-
-
     }
 
+
+
     private fun performSearch(query: String) {
+
+        showLoading(true)
         mainViewModel.searchUser(query)
+
     }
 
 
 
     private fun setUserData(userData: List<ItemsItem>) {
+
         val adapter = MainAdapter()
         adapter.submitList(userData)
         binding.rvUser.adapter = adapter

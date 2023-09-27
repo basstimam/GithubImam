@@ -15,7 +15,7 @@ import com.example.githubimam.databinding.ItemUserBinding
 import com.example.githubimam.detail_user.DetailUserActivity
 
 
-class MainAdapter: ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK){
+class MainAdapter(): ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK){
 
 
 
@@ -30,9 +30,10 @@ class MainAdapter: ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK
 
     override fun onBindViewHolder(holder: MainAdapter.ViewHolder, position: Int) {
         val users = getItem(position)
-        holder.bind(users)
-        holder.itemView.setOnClickListener{
 
+        holder.bind(users)
+
+        holder.itemView.setOnClickListener{
 
             val intent = Intent(holder.itemView.context, DetailUserActivity::class.java)
             val bundle = Bundle()
@@ -40,10 +41,6 @@ class MainAdapter: ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK
             bundle.putString(AVATAR, users.avatarUrl)
             intent.putExtras(bundle)
             holder.itemView.context.startActivity(intent)
-
-
-
-
 
 
 
@@ -59,24 +56,10 @@ class MainAdapter: ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK
 
 
         fun bind(users: ItemsItem){
-
-
-
             binding.profileName.text = users.login
             Glide.with(itemView.context)
                 .load(users.avatarUrl)
                 .into(binding.profileImg)
-
-
-
-
-
-
-
-
-
-
-
 
         }
     }

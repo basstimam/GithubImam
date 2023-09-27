@@ -36,24 +36,23 @@ class DetailUserActivity : AppCompatActivity() {
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
         showLoading(true)
+
+        setupDetailUser()
+
+
+
+    }
+
+    private fun setupDetailUser()
+    {
         val bundle = intent.extras
-
-
-
         val login = Bundle()
         login.putString("NAME", bundle?.getString("NAME"))
 
 
 
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, login)
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabs)
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
-        supportActionBar?.elevation = 0f
+
 
 
 
@@ -71,6 +70,17 @@ class DetailUserActivity : AppCompatActivity() {
 
                 detailUserViewModel.detailUser.observe(this) { detailUser ->
                     if (detailUser != null) {
+
+
+                        val sectionsPagerAdapter = SectionsPagerAdapter(this, login)
+                        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
+                        viewPager.adapter = sectionsPagerAdapter
+                        val tabs: TabLayout = findViewById(R.id.tabs)
+                        TabLayoutMediator(tabs, viewPager) { tab, position ->
+                            tab.text = resources.getString(TAB_TITLES[position])
+                        }.attach()
+                        supportActionBar?.elevation = 0f
+
                         showLoading(false)
                     }
 
@@ -78,6 +88,7 @@ class DetailUserActivity : AppCompatActivity() {
                     binding.detailProfileName.text = detailUser.name
                     binding.detailFollowers.text = detailUser.followers.toString() + " Followers"
                     binding.detailFollowing.text = detailUser.following.toString() + " Following"
+                    binding.detailUsername.text = detailUser.login
 
                     Glide.with(this@DetailUserActivity)
                         .load(detailUser.avatarUrl)
@@ -113,12 +124,16 @@ class DetailUserActivity : AppCompatActivity() {
             binding.detailFollowers.visibility = View.GONE
             binding.detailFollowing.visibility = View.GONE
             binding.detailProfileImg.visibility = View.GONE
+            binding.tabs.visibility = View.GONE
+            binding.detailUsername.visibility = View.GONE
         } else {
             binding.progressBar.visibility = View.GONE
             binding.detailProfileName.visibility = View.VISIBLE
             binding.detailFollowers.visibility = View.VISIBLE
             binding.detailFollowing.visibility = View.VISIBLE
             binding.detailProfileImg.visibility = View.VISIBLE
+            binding.tabs.visibility = View.VISIBLE
+            binding.detailUsername.visibility = View.VISIBLE
         }
     }
 

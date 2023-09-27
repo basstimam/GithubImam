@@ -61,6 +61,21 @@ tools:context=".MainActivity">
         app:layout_constraintTop_toBottomOf="@id/detail_profile_img" />
 
     <TextView
+        android:id="@+id/detail_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:gravity="center"
+        android:text="username"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/detail_followers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_profile_name" />
+
+
+    <TextView
         android:id="@+id/detail_followers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,6 +87,7 @@ tools:context=".MainActivity">
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@id/detail_profile_name" />
 
     <TextView
@@ -92,6 +108,7 @@ tools:context=".MainActivity">
 
 
 <com.google.android.material.tabs.TabLayout
+
     app:tabIndicatorColor="@color/black"
     android:visibility="visible"
     android:id="@+id/tabs"
