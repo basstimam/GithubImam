@@ -17,12 +17,13 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        buildConfigField("String", "KEY", "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")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
@@ -32,6 +33,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
         }
     }
     compileOptions {

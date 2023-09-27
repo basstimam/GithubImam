@@ -32,7 +32,7 @@ class FollowersAdapter : ListAdapter<FollowersResponseItem, FollowersAdapter.Vie
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FollowersResponseItem>() {
             override fun areItemsTheSame(oldItem: FollowersResponseItem, newItem: FollowersResponseItem): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.login == newItem.login
             }
 
             override fun areContentsTheSame(oldItem: FollowersResponseItem, newItem: FollowersResponseItem): Boolean {

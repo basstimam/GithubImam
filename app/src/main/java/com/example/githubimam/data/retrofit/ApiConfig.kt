@@ -1,5 +1,6 @@
 package com.example.githubimam.data.retrofit
 
+
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,6 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
 
     companion object{
+
+
+
         fun getApiService() : ApiService{
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()

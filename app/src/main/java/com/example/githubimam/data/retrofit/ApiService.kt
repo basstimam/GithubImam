@@ -11,7 +11,7 @@ import retrofit2.http.*
 
 interface ApiService {
 
-//    @Headers("Authorization: Bearer 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")
+
     @GET("search/users")
     fun getUsers(
         @Query("q") q: String

@@ -15,20 +15,20 @@ import com.example.githubimam.databinding.ItemUserBinding
 import com.example.githubimam.detail_user.DetailUserActivity
 
 
-class MainAdapter(): ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK){
+class MainAdapter : ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK){
 
 
 
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
 
 
-    override fun onBindViewHolder(holder: MainAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val users = getItem(position)
 
         holder.bind(users)

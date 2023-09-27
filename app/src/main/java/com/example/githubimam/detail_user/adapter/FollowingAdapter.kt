@@ -39,7 +39,7 @@ class FollowingAdapter :    ListAdapter<FollowingResponseItem, FollowingAdapter.
                 oldItem: FollowingResponseItem,
                 newItem: FollowingResponseItem
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.login == newItem.login
             }
 
             override fun areContentsTheSame(
