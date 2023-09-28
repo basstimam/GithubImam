@@ -1,7 +1,7 @@
-package com.example.githubimam.detail_user.adapter
+package com.example.githubimam.ui.adapter
 
-import FollowersFragment
-import FollowingFragment
+import com.example.githubimam.ui.fragment.FollowersFragment
+import com.example.githubimam.ui.fragment.FollowingFragment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

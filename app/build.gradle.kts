@@ -6,7 +6,7 @@ plugins {
 
 }
 object secret{
-    const val GITHUB_TOKEN = "\"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\""
+    const val GITHUB_TOKEN = "\"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\""
 }
 
 android {
@@ -51,6 +51,8 @@ android {
 
 dependencies {
     val nav_version = "2.5.3"
+
+
 
     implementation("com.google.android.material:material:1.3.1")
     implementation("androidx.viewpager2:viewpager2:1.0.0")

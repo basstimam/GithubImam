@@ -1,6 +1,7 @@
-package com.example.githubimam.detail_user.viewmodel
+package com.example.githubimam.ui.viewmodel
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -46,7 +47,7 @@ private const val TAG = "DetailUserViewModel"
             }
 
             override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
-                Log.e(TAG, "API call failed", t)
+                Toast.makeText(null, "Can't get detail user", Toast.LENGTH_SHORT).show()
             }
 
         })

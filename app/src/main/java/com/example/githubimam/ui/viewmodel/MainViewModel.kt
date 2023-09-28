@@ -1,4 +1,4 @@
-package com.example.githubimam.detail_user.viewmodel
+package com.example.githubimam.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData

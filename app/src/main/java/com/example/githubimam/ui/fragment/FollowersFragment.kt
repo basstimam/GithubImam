@@ -1,5 +1,8 @@
+package com.example.githubimam.ui.fragment
+
+import FollowersAdapter
+import UserViewmodel
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +11,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubimam.databinding.FragmentFollowersBinding
-import com.example.githubimam.detail_user.DetailUserActivity
-import kotlin.math.log
 
 class FollowersFragment : Fragment() {
-    private lateinit var binding: FragmentFollowersBinding
-    private val followersViewModel: FollowersViewModel by activityViewModels()
+    private var _binding: FragmentFollowersBinding? = null
+    private val binding get() = _binding!!
+    private val userViewmodel: UserViewmodel by activityViewModels()
     private val followersAdapter = FollowersAdapter()
 
 
@@ -23,7 +25,7 @@ class FollowersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFollowersBinding.inflate(inflater, container, false)
+        _binding= FragmentFollowersBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -60,14 +62,14 @@ class FollowersFragment : Fragment() {
         val login = arguments?.getString("NAME")
         if (login != null) {
 
-            followersViewModel.getFollowers(login)
+            userViewmodel.getFollowers(login)
         }
 
 
     }
 
     private fun observeFollowers() {
-        followersViewModel.followers.observe(viewLifecycleOwner) { followers ->
+        userViewmodel.followers.observe(viewLifecycleOwner) { followers ->
 
             if (followers != null) {
                 showLoading(false)

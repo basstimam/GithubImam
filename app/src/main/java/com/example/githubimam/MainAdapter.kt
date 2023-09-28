@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubimam.data.response.ItemsItem
 import com.example.githubimam.databinding.ItemUserBinding
-import com.example.githubimam.detail_user.DetailUserActivity
+import com.example.githubimam.ui.activity.DetailUserActivity
 
 
 class MainAdapter : ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK){

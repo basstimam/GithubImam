@@ -1,5 +1,7 @@
+package com.example.githubimam.ui.fragment
+
+import UserViewmodel
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,16 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubimam.databinding.FragmentFollowersBinding
 import com.example.githubimam.databinding.FragmentFollowingBinding
-import com.example.githubimam.detail_user.DetailUserActivity
-import com.example.githubimam.detail_user.adapter.FollowingAdapter
-import com.example.githubimam.detail_user.viewmodel.FollowingViewmodel
-import kotlin.math.log
+import com.example.githubimam.ui.adapter.FollowingAdapter
 
 class FollowingFragment : Fragment() {
-    private lateinit var binding: FragmentFollowingBinding
-    private val followingViewmodel: FollowingViewmodel by activityViewModels()
+    private var _binding: FragmentFollowingBinding? = null
+    private val binding get() = _binding!!
+
+    private val userViewmodel: UserViewmodel by activityViewModels()
     private val followingAdapter = FollowingAdapter()
 
 
@@ -26,7 +26,7 @@ class FollowingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFollowingBinding.inflate(inflater, container, false)
+        _binding = FragmentFollowingBinding.inflate(inflater, container, false)
 
         return binding.root
 
@@ -65,14 +65,14 @@ class FollowingFragment : Fragment() {
         val login = arguments?.getString("NAME")
         if (login != null) {
 
-            followingViewmodel.getFollowing(login)
+            userViewmodel.getFollowing(login)
         }
 
 
     }
 
     private fun observeFollowing() {
-        followingViewmodel.following.observe(viewLifecycleOwner) { following ->
+        userViewmodel.following.observe(viewLifecycleOwner) { following ->
             if (following != null)
             {
                 showLoading(false)

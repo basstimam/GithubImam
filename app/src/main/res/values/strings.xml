@@ -6,4 +6,6 @@
 
     <string name="tab_text_1">Followers</string>
     <string name="tab_text_2">Following</string>
+    <string name="followers">%d Followers</string>
+    <string name="following">%d Following</string>
 </resources>

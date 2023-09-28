@@ -1,4 +1,4 @@
-package com.example.githubimam.detail_user.adapter
+package com.example.githubimam.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,9 @@ import com.bumptech.glide.Glide
 import com.example.githubimam.data.response.FollowingResponseItem
 import com.example.githubimam.databinding.ItemUserBinding
 
-class FollowingAdapter :    ListAdapter<FollowingResponseItem, FollowingAdapter.ViewHolder>(DIFF_CALLBACK) {
+class FollowingAdapter :    ListAdapter<FollowingResponseItem, FollowingAdapter.ViewHolder>(
+    DIFF_CALLBACK
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)

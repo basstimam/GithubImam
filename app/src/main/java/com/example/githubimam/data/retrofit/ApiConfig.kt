@@ -1,6 +1,7 @@
 package com.example.githubimam.data.retrofit
 
 
+
 import com.example.githubimam.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -22,7 +23,12 @@ class ApiConfig {
                     .addHeader("Authorization", BuildConfig.KEY)
                     .build()
                 chain.proceed(requestHeaders)
+
+
             }
+
+
+
 
             val client = OkHttpClient.Builder()
                 .addInterceptor(authInterceptor)

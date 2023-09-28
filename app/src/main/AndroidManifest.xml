@@ -15,11 +15,11 @@
         android:theme="@style/Theme.GithubImam"
         tools:targetApi="31" >
         <activity
-            android:name=".detail_user.DetailUserActivity"
+            android:name=".ui.activity.DetailUserActivity"
             android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

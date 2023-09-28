@@ -1,7 +1,6 @@
-package com.example.githubimam
+package com.example.githubimam.ui.activity
 
 
-import android.content.ClipData.Item
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,7 +9,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubimam.detail_user.viewmodel.MainViewModel
+import com.example.githubimam.MainAdapter
+import com.example.githubimam.ui.viewmodel.MainViewModel
 
 import com.example.githubimam.data.response.ItemsItem
 
