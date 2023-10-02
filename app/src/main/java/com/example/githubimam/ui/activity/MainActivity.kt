@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.Toast
 
 import androidx.activity.viewModels
@@ -21,6 +22,7 @@ import com.example.githubimam.data.response.ItemsItem
 
 import com.example.githubimam.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,17 +44,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setupMain()
 
-binding.searchBar.setOnMenuItemClickListener{
-    menuItem ->
-    when(menuItem.itemId){
-        R.id.menu_item_settings -> {
-            val intent = Intent(this, ThemeActivity::class.java)
-            startActivity(intent)
-            true
-        }
-        else -> false
-    }
-}
+
+
+
 
 
 
@@ -80,6 +74,18 @@ binding.searchBar.setOnMenuItemClickListener{
 
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvUser.addItemDecoration(itemDecoration)
+
+        binding.searchBar.setOnMenuItemClickListener{
+                menuItem ->
+            when(menuItem.itemId){
+                R.id.menu_item_settings -> {
+                    val intent = Intent(this, ThemeActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
 
 
         with(binding) {
@@ -134,6 +140,8 @@ binding.searchBar.setOnMenuItemClickListener{
             binding.progressBar.visibility = View.GONE
         }
     }
+
+
 
 
 }
