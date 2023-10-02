@@ -8,4 +8,5 @@
     <string name="tab_text_2">Following</string>
     <string name="followers">%d Followers</string>
     <string name="following">%d Following</string>
+    <string name="change_theme">Change Theme</string>
 </resources>

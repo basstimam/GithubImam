@@ -1,20 +1,26 @@
 package com.example.githubimam.ui.activity
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubimam.MainAdapter
+import com.example.githubimam.R
 import com.example.githubimam.ui.viewmodel.MainViewModel
 
 import com.example.githubimam.data.response.ItemsItem
 
 import com.example.githubimam.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,10 +42,26 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setupMain()
 
+binding.searchBar.setOnMenuItemClickListener{
+    menuItem ->
+    when(menuItem.itemId){
+        R.id.menu_item_settings -> {
+            val intent = Intent(this, ThemeActivity::class.java)
+            startActivity(intent)
+            true
+        }
+        else -> false
+    }
+}
+
+
+
 
 
 
     }
+
+
 
 
 
@@ -72,7 +94,18 @@ class MainActivity : AppCompatActivity() {
                     performSearch(search.toString())
                     false
                 }
+
+
+
+
+
+
+
+
         }
+
+
+
     }
 
 
