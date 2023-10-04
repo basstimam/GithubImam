@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_white"
+    android:background="?attr/colorPrimary"
     android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
 
@@ -22,6 +22,7 @@
     </com.google.android.material.search.SearchBar>
 
     <com.google.android.material.search.SearchView
+
         android:id="@+id/searchView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -48,7 +49,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_user"
-
+    android:background="?attr/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"

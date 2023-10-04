@@ -4,6 +4,9 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="colorPrimary">@color/night</item>
+        <item name="colorPrimaryVariant">@color/night</item>
     </style>
+
+
     <style name="Theme.GithubImam" parent="Base.Theme.GithubImam" />
 </resources>

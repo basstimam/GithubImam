@@ -8,6 +8,12 @@
             @color/cream
         </item>
 
+        <item name="colorPrimaryVariant">
+            @color/gray_white
+        </item>
+
+
+
     </style>
 
     <style name="Theme.GithubImam" parent="Base.Theme.GithubImam" />
