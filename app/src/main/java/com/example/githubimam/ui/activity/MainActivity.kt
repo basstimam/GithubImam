@@ -14,6 +14,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.githubimam.FavoriteActivity
 import com.example.githubimam.MainAdapter
 import com.example.githubimam.R
 import com.example.githubimam.ui.viewmodel.MainViewModel
@@ -80,6 +81,12 @@ class MainActivity : AppCompatActivity() {
             when(menuItem.itemId){
                 R.id.menu_item_settings -> {
                     val intent = Intent(this, ThemeActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.menu_item_favorite -> {
+                    val intent = Intent(this, FavoriteActivity::class.java)
                     startActivity(intent)
                     true
                 }

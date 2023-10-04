@@ -19,6 +19,18 @@ tools:context=".ui.activity.MainActivity">
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+           android:id="@+id/fab_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="16dp"
+            tools:ignore="MissingConstraints"
+            android:src="@drawable/baseline_favorite_24"
+
+            />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/detail_profile_img"
         android:layout_width="150dp"
