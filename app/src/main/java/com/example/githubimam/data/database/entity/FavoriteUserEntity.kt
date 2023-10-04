@@ -6,11 +6,11 @@ import androidx.room.PrimaryKey
 
 
 @Entity
-data class FavoriteUserEntity (
+data class FavoriteUserEntity(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    var id: Int? = 0,
+    var id: Int = 0,
 
     @ColumnInfo(name = "login")
     var login: String? = null,
@@ -19,4 +19,6 @@ data class FavoriteUserEntity (
     var avatar_url: String? = null,
 
 
-)
+
+
+    )

@@ -24,9 +24,9 @@ data class ItemsItem(
 	val followersUrl: String,
 
 	@field:SerializedName("avatar_url")
-	val avatarUrl: String,
+	val avatarUrl: String?,
 
-)
+	)
 
 data class FollowersResponseItem(
 

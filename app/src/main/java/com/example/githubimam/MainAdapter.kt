@@ -18,7 +18,7 @@ import com.example.githubimam.ui.activity.DetailUserActivity
 class MainAdapter : ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK){
 
 
-
+    private var onItemClickCallback: OnItemClickedCallback? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -78,6 +78,13 @@ class MainAdapter : ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBAC
 
         const val NAME = "NAME"
         const val AVATAR = "AVATAR"
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickedCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+    interface OnItemClickedCallback {
+        fun onItemClicked(data: ItemsItem)
     }
 
 

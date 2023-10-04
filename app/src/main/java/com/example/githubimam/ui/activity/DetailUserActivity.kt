@@ -2,14 +2,20 @@ package com.example.githubimam.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import androidx.viewpager2.widget.ViewPager2
+import com.app.githubuserapplication.view.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.example.githubimam.R
+import com.example.githubimam.data.database.FavoriteUserRepository
+import com.example.githubimam.data.database.entity.FavoriteUserEntity
 import com.example.githubimam.databinding.ActivityDetailUserBinding
 import com.example.githubimam.ui.adapter.SectionsPagerAdapter
+import com.example.githubimam.ui.viewmodel.DetailUserFactory
 import com.example.githubimam.ui.viewmodel.DetailUserViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -17,7 +23,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailUserBinding
-    private val detailUserViewModel by viewModels<DetailUserViewModel>()
+    private val detailUserViewModel by viewModels<DetailUserViewModel>(){
+        DetailUserFactory(application)
+    }
+
+    private val buttonState = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +40,10 @@ class DetailUserActivity : AppCompatActivity() {
         showLoading(true)
 
         setupDetailUser()
+
+
+
+
 
 
 
@@ -92,17 +106,30 @@ class DetailUserActivity : AppCompatActivity() {
 
                 detailUserViewModel.getDetailUser(username)
 
+                detailUserViewModel.getUserByLogin(username).observe(this) {
+                    if (it != null) {
+                        binding.fabFavorite.setImageResource(R.drawable.baseline_favorite_24)
+                        binding.fabFavorite.setOnClickListener {
+
+                            detailUserViewModel.delete(username)
+
+                        }
 
 
+                    } else {
+                        binding.fabFavorite.setImageResource(R.drawable.baseline_favorite_border_24)
+                        binding.fabFavorite.setOnClickListener {
+                            val favoriteUserEntity = FavoriteUserEntity(
+                                0,
+                                detailUserViewModel.detailUser.value?.login,
+                                detailUserViewModel.detailUser.value?.avatarUrl,
+                            )
 
+                            detailUserViewModel.insert(favoriteUserEntity)
+                        }
 
-
-
-
-
-
-
-
+                    }
+                }
 
 
             }

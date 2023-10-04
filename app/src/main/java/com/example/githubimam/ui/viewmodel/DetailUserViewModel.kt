@@ -1,17 +1,20 @@
 package com.example.githubimam.ui.viewmodel
 
+import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.githubimam.data.database.FavoriteUserRepository
+import com.example.githubimam.data.database.entity.FavoriteUserEntity
 import com.example.githubimam.data.response.DetailUserResponse
 import com.example.githubimam.data.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailUserViewModel: ViewModel() {
+class DetailUserViewModel(mApplication: Application): ViewModel() {
 
     private val _detailUser = MutableLiveData<DetailUserResponse>()
     val detailUser: LiveData<DetailUserResponse> = _detailUser
@@ -27,6 +30,30 @@ class DetailUserViewModel: ViewModel() {
     companion object{
 private const val TAG = "DetailUserViewModel"
     }
+    private val favoriteUserRepository: FavoriteUserRepository = FavoriteUserRepository(mApplication)
+    fun insert(user: FavoriteUserEntity) {
+        favoriteUserRepository.insert(user)
+    }
+
+    fun getUserByLogin(login: String): LiveData<FavoriteUserEntity> {
+        return favoriteUserRepository.getUserByLogin(login)
+    }
+
+    fun isUserExists(login: String): Boolean {
+        val existingUser = favoriteUserRepository.getUserByLogin(login)
+        return existingUser != null
+    }
+
+    fun delete(login: String) {
+        favoriteUserRepository.delete(login)
+    }
+
+    fun getAllFavorites(): LiveData<List<FavoriteUserEntity>> = favoriteUserRepository.getAllFavorites()
+
+
+
+
+
 
 
 
@@ -56,6 +83,7 @@ private const val TAG = "DetailUserViewModel"
         _userName.value = userName
         _userAvatarUrl.value = userAvatarUrl
     }
+
 
 
 

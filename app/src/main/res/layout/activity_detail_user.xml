@@ -27,7 +27,8 @@ tools:context=".ui.activity.MainActivity">
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteY="16dp"
             tools:ignore="MissingConstraints"
-            android:src="@drawable/baseline_favorite_24"
+            android:src="@drawable/baseline_favorite_border_24"
+
 
             />
 
