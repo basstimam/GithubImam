@@ -33,7 +33,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var settingPreferences: SettingPreferences
+
     private val mainViewModel by viewModels<MainViewModel>()
 
 
