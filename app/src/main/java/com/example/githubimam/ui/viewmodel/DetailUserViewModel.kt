@@ -42,11 +42,9 @@ class DetailUserViewModel(mApplication: Application) : ViewModel() {
     }
 
 
-
     fun delete(login: String) {
         favoriteUserRepository.delete(login)
     }
-
 
 
     internal fun getDetailUser(getUsername: String) {

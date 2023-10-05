@@ -4,8 +4,10 @@ package com.example.githubimam.ui.activity
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -24,11 +26,14 @@ import com.example.githubimam.ui.settings.dataStore
 import com.example.githubimam.ui.viewmodel.MainViewModel
 
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
 
     private val mainViewModel by viewModels<MainViewModel>()
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,15 +46,28 @@ installSplashScreen()
         setupMain()
 
 
+
+
     }
 
 
     private fun setupMain() {
         mainViewModel.githubUser.observe(this) { user ->
+
             if (user != null) {
 
+
+
+
                 showLoading(false)
+                val count = user.size
+                Toast.makeText(this, "Found $count user", Toast.LENGTH_SHORT).show()
+
+
             }
+
+
+
 
             setUserData(user)
         }
@@ -59,13 +77,17 @@ installSplashScreen()
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvUser.addItemDecoration(itemDecoration)
 
+        val changeThemeMenuItem = binding.searchBar.menu.findItem(R.id.menu_item_change_theme)
+        val favoriteMenuItem = binding.searchBar.menu.findItem(R.id.menu_item_favorite)
+
         val preferences = SettingPreferences.getInstance(application.dataStore)
         val themeViewModel =
             ViewModelProvider(this, ViewModelFactory(preferences))[ThemeViewmodel::class.java]
         themeViewModel.getThemeSetting().observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
+                changeThemeMenuItem.setIcon(R.drawable.baseline_invert_colors_24_white)
+                favoriteMenuItem.setIcon(R.drawable.baseline_favorite_24_white)
 
 
             } else {
@@ -81,12 +103,12 @@ installSplashScreen()
             when (menuItem.itemId) {
                 R.id.menu_item_change_theme -> {
                     val isDarkModeActive = isDarkModeEnabled()
+
+
                     Log.d("MainActivity", "isDarkModeActive: $isDarkModeActive")
                     val newTheme = !isDarkModeActive
                     setTheme(newTheme)
                     themeViewModel.saveThemeSetting(newTheme)
-
-
                     true
                 }
 
@@ -125,7 +147,13 @@ installSplashScreen()
     private fun performSearch(query: String) {
 
         showLoading(true)
-        mainViewModel.searchUser(query)
+
+            mainViewModel.searchUser(query)
+
+
+
+
+
 
     }
 
@@ -141,17 +169,25 @@ installSplashScreen()
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
+            binding.rvUser.visibility = View.GONE
         } else {
             binding.progressBar.visibility = View.GONE
+            binding.rvUser.visibility = View.VISIBLE
         }
     }
 
     private fun setTheme(isDark: Boolean) {
+
+
         if (isDark) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+
+
+
         }
 
 
