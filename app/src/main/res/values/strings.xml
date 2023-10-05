@@ -9,4 +9,6 @@
     <string name="followers">%d Followers</string>
     <string name="following">%d Following</string>
     <string name="change_theme">Change Theme</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="light_theme">Light Theme\n</string>
 </resources>

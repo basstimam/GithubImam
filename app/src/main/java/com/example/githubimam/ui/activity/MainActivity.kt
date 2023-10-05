@@ -2,12 +2,17 @@ package com.example.githubimam.ui.activity
 
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.CompoundButton
 
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubimam.MainAdapter
@@ -17,6 +22,7 @@ import com.example.githubimam.ui.viewmodel.MainViewModel
 import com.example.githubimam.data.response.ItemsItem
 
 import com.example.githubimam.databinding.ActivityMainBinding
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,10 +39,20 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         showLoading(true)
         supportActionBar?.hide()
         setupMain()
+        setTheme()
+
+
+
+
+
+
+
+
+
 
 
 
@@ -72,18 +88,18 @@ class MainActivity : AppCompatActivity() {
         binding.searchBar.setOnMenuItemClickListener{
                 menuItem ->
             when(menuItem.itemId){
-                R.id.menu_item_settings -> {
-                    val intent = Intent(this, ThemeActivity::class.java)
-                    startActivity(intent)
+                R.id.menu_item_change_theme-> {
+
                     true
                 }
 
                 R.id.menu_item_favorite -> {
-                    val intent = Intent(this, FavoriteActivity::class.java)
-                    startActivity(intent)
+                    Intent(this, FavoriteActivity::class.java).also {
+                        startActivity(it)
+                    }
                     true
                 }
-                else -> false
+               else -> false
             }
         }
 
@@ -125,6 +141,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
     private fun setUserData(userData: List<ItemsItem>) {
 
         val adapter = MainAdapter()
@@ -141,7 +159,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setTheme(){
+        val searchBarEditText = binding.searchBar
 
 
+
+
+
+    }
+
+
+    private fun isDarkModeEnabled(): Boolean {
+        return when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES -> true
+            else -> false
+        }
+    }
 
 }

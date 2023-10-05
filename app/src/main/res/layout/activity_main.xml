@@ -16,9 +16,11 @@
         android:layout_marginTop="16dp"
         android:hint="Search.."
         app:menu="@menu/in_search_menu"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
     </com.google.android.material.search.SearchBar>
 
     <com.google.android.material.search.SearchView

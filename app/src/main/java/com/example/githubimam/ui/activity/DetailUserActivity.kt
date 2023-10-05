@@ -27,7 +27,7 @@ class DetailUserActivity : AppCompatActivity() {
         DetailUserFactory(application)
     }
 
-    private val buttonState = false
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
