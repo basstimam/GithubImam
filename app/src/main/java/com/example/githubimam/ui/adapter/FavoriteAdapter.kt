@@ -1,11 +1,15 @@
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.githubimam.MainAdapter
 import com.example.githubimam.data.database.entity.FavoriteUserEntity
 import com.example.githubimam.databinding.ItemUserBinding
+import com.example.githubimam.ui.activity.DetailUserActivity
 
 class FavoriteAdapter :
     ListAdapter<FavoriteUserEntity, FavoriteAdapter.FavoriteUserViewHolder>(FavoriteUserDiffCallback()) {
@@ -21,6 +25,17 @@ class FavoriteAdapter :
         holder.bind(current)
 
 
+
+        holder.itemView.setOnClickListener{
+            val intent = Intent(holder.itemView.context, DetailUserActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString(MainAdapter.NAME, current.login )
+            intent.putExtras(bundle)
+            holder.itemView.context.startActivity(intent)
+        }
+
+
+
     }
 
     inner class FavoriteUserViewHolder(private val binding: ItemUserBinding) :
@@ -32,6 +47,8 @@ class FavoriteAdapter :
                 .load(favoriteUser.avatar_url)
                 .into(binding.profileImg)
         }
+
+
     }
 
     fun setFavorites(favorites: List<FavoriteUserEntity>) {

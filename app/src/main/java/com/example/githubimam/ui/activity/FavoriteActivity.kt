@@ -40,6 +40,8 @@ class FavoriteActivity : AppCompatActivity() {
 
 
 
+
+
         binding?.rvFavorite?.apply {
             layoutManager = LinearLayoutManager(this@FavoriteActivity)
             adapter = favoriteAdapter
