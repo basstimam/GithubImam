@@ -1,15 +1,13 @@
 package com.example.githubimam.ui.settings
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ThemeViewmodel(private val pref: SettingPreferences): ViewModel() {
+class ThemeViewmodel(private val pref: SettingPreferences) : ViewModel() {
 
 
     fun getThemeSetting(): LiveData<Boolean> {

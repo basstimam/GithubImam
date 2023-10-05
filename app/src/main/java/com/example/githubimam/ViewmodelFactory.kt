@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.githubimam.data.database.FavoriteUserRepository
 import com.example.githubimam.ui.viewmodel.FavoriteViewmodel
 
-class ViewModelFactory private constructor(private val favUserRepos: FavoriteUserRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory private constructor(private val favUserRepos: FavoriteUserRepository) :
+    ViewModelProvider.NewInstanceFactory() {
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
@@ -22,11 +23,6 @@ class ViewModelFactory private constructor(private val favUserRepos: FavoriteUse
         }
 
 
-
-
-
-
-
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -36,12 +32,6 @@ class ViewModelFactory private constructor(private val favUserRepos: FavoriteUse
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
-
-
-
-
-
-
 
 
 }

@@ -14,7 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailUserViewModel(mApplication: Application): ViewModel() {
+class DetailUserViewModel(mApplication: Application) : ViewModel() {
 
     private val _detailUser = MutableLiveData<DetailUserResponse>()
     val detailUser: LiveData<DetailUserResponse> = _detailUser
@@ -26,11 +26,13 @@ class DetailUserViewModel(mApplication: Application): ViewModel() {
     val userAvatarUrl: LiveData<String> = _userAvatarUrl
 
 
-
-    companion object{
-private const val TAG = "DetailUserViewModel"
+    companion object {
+        private const val TAG = "DetailUserViewModel"
     }
-    private val favoriteUserRepository: FavoriteUserRepository = FavoriteUserRepository(mApplication)
+
+    private val favoriteUserRepository: FavoriteUserRepository =
+        FavoriteUserRepository(mApplication)
+
     fun insert(user: FavoriteUserEntity) {
         favoriteUserRepository.insert(user)
     }
@@ -39,36 +41,25 @@ private const val TAG = "DetailUserViewModel"
         return favoriteUserRepository.getUserByLogin(login)
     }
 
-    fun isUserExists(login: String): Boolean {
-        val existingUser = favoriteUserRepository.getUserByLogin(login)
-        return existingUser != null
-    }
+
 
     fun delete(login: String) {
         favoriteUserRepository.delete(login)
     }
 
-    fun getAllFavorites(): LiveData<List<FavoriteUserEntity>> = favoriteUserRepository.getAllFavorites()
 
 
-
-
-
-
-
-
-    internal fun getDetailUser(getUsername: String){
+    internal fun getDetailUser(getUsername: String) {
         val client = ApiConfig.getApiService().getDetailUser(getUsername)
 
-        client.enqueue(object: Callback<DetailUserResponse>{
+        client.enqueue(object : Callback<DetailUserResponse> {
             override fun onResponse(
                 call: Call<DetailUserResponse>,
                 response: Response<DetailUserResponse>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     _detailUser.value = response.body()
-                }else
-                {
+                } else {
                     Log.d(TAG, "Response not successful")
                 }
             }
@@ -79,12 +70,11 @@ private const val TAG = "DetailUserViewModel"
 
         })
     }
+
     fun setData(userName: String, userAvatarUrl: String) {
         _userName.value = userName
         _userAvatarUrl.value = userAvatarUrl
     }
-
-
 
 
 }

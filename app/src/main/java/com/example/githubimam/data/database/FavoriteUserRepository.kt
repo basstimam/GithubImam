@@ -9,9 +9,9 @@ import java.util.concurrent.Executors
 
 class FavoriteUserRepository(
     application: Application
-){
-private val mFavoriteUserDao: FavoriteDAO
-private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
+) {
+    private val mFavoriteUserDao: FavoriteDAO
+    private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
 
     init {
         val db = FavoriteDatabase.getDatabase(application)
@@ -29,16 +29,9 @@ private val executorService: ExecutorService = Executors.newSingleThreadExecutor
     }
 
 
-
-
     fun delete(login: String) {
         executorService.execute { mFavoriteUserDao.deleteFavorite(login) }
     }
-
-
-
-
-
 
 
 }

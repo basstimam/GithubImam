@@ -11,12 +11,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val _githubUser = MutableLiveData<List<ItemsItem>>()
     val githubUser: LiveData<List<ItemsItem>> = _githubUser
-
-
 
 
     companion object {
@@ -32,10 +30,13 @@ class MainViewModel: ViewModel() {
         val client = ApiConfig.getApiService().getUsers(search)
 
         client.enqueue(object : Callback<GithubResponse> {
-            override fun onResponse(call: Call<GithubResponse>, response: Response<GithubResponse>) {
+            override fun onResponse(
+                call: Call<GithubResponse>,
+                response: Response<GithubResponse>
+            ) {
                 if (response.isSuccessful) {
-                        _githubUser.value = response.body()?.items
-                        Log.d(TAG, response.body()?.items.toString())
+                    _githubUser.value = response.body()?.items
+                    Log.d(TAG, response.body()?.items.toString())
 
                 } else {
                     Log.d(TAG, "Response not successful")
@@ -51,17 +52,20 @@ class MainViewModel: ViewModel() {
     fun searchUser(query: String) {
 
 
-
-
         val client = ApiConfig.getApiService().getUsers(query)
 
         client.enqueue(object : Callback<GithubResponse> {
-            override fun onResponse(call: Call<GithubResponse>, response: Response<GithubResponse>) {
+            override fun onResponse(
+                call: Call<GithubResponse>,
+                response: Response<GithubResponse>
+            ) {
                 if (response.isSuccessful) {
                     val githubResponse = response.body()
                     val allUsers: List<ItemsItem>? = githubResponse?.items
 
-                    val filteredUsers = allUsers?.filter { it.login.contains(query, ignoreCase = true) } ?: emptyList()
+                    val filteredUsers =
+                        allUsers?.filter { it.login.contains(query, ignoreCase = true) }
+                            ?: emptyList()
 
                     _githubUser.value = filteredUsers
                     Log.d(TAG, filteredUsers.toString())
@@ -75,8 +79,6 @@ class MainViewModel: ViewModel() {
             }
         })
     }
-
-
 
 
 }

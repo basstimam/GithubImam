@@ -7,7 +7,8 @@ import com.bumptech.glide.Glide
 import com.example.githubimam.data.database.entity.FavoriteUserEntity
 import com.example.githubimam.databinding.ItemUserBinding
 
-class FavoriteAdapter : ListAdapter<FavoriteUserEntity, FavoriteAdapter.FavoriteUserViewHolder>(FavoriteUserDiffCallback()) {
+class FavoriteAdapter :
+    ListAdapter<FavoriteUserEntity, FavoriteAdapter.FavoriteUserViewHolder>(FavoriteUserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteUserViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -40,11 +41,17 @@ class FavoriteAdapter : ListAdapter<FavoriteUserEntity, FavoriteAdapter.Favorite
 }
 
 class FavoriteUserDiffCallback : DiffUtil.ItemCallback<FavoriteUserEntity>() {
-    override fun areItemsTheSame(oldItem: FavoriteUserEntity, newItem: FavoriteUserEntity): Boolean {
+    override fun areItemsTheSame(
+        oldItem: FavoriteUserEntity,
+        newItem: FavoriteUserEntity
+    ): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: FavoriteUserEntity, newItem: FavoriteUserEntity): Boolean {
+    override fun areContentsTheSame(
+        oldItem: FavoriteUserEntity,
+        newItem: FavoriteUserEntity
+    ): Boolean {
         return oldItem == newItem
     }
 }

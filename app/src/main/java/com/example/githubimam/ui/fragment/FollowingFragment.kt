@@ -20,8 +20,6 @@ class FollowingFragment : Fragment() {
     private val followingAdapter = FollowingAdapter()
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,19 +35,6 @@ class FollowingFragment : Fragment() {
         showLoading(true)
         setupRecyclerView()
         observeFollowing()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -73,13 +58,13 @@ class FollowingFragment : Fragment() {
 
     private fun observeFollowing() {
         userViewmodel.following.observe(viewLifecycleOwner) { following ->
-            if (following != null)
-            {
+            if (following != null) {
                 showLoading(false)
             }
             followingAdapter.submitList(following)
         }
     }
+
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE

@@ -2,16 +2,12 @@ package com.example.githubimam.ui.activity
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.viewpager2.widget.ViewPager2
-import com.app.githubuserapplication.view.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.example.githubimam.R
-import com.example.githubimam.data.database.FavoriteUserRepository
 import com.example.githubimam.data.database.entity.FavoriteUserEntity
 import com.example.githubimam.databinding.ActivityDetailUserBinding
 import com.example.githubimam.ui.adapter.SectionsPagerAdapter
@@ -23,11 +19,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailUserBinding
-    private val detailUserViewModel by viewModels<DetailUserViewModel>(){
+    private val detailUserViewModel by viewModels<DetailUserViewModel> {
         DetailUserFactory(application)
     }
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,15 +36,9 @@ class DetailUserActivity : AppCompatActivity() {
         setupDetailUser()
 
 
-
-
-
-
-
     }
 
-    private fun setupDetailUser()
-    {
+    private fun setupDetailUser() {
         val bundle = intent.extras
         val login = Bundle()
         login.putString("NAME", bundle?.getString("NAME"))
@@ -71,9 +59,6 @@ class DetailUserActivity : AppCompatActivity() {
             if (username != null) {
 
 
-
-
-
                 detailUserViewModel.detailUser.observe(this) { detailUser ->
                     if (detailUser != null) {
 
@@ -91,13 +76,15 @@ class DetailUserActivity : AppCompatActivity() {
                     }
 
 
-                   with(binding){
-                       detailProfileName.text = detailUser.name
-                       detailFollowers.text = resources.getString(R.string.followers, detailUser.followers)
-                       detailFollowing.text = resources.getString(R.string.following, detailUser.following)
-                       detailUsername.text = detailUser.login
+                    with(binding) {
+                        detailProfileName.text = detailUser.name
+                        detailFollowers.text =
+                            resources.getString(R.string.followers, detailUser.followers)
+                        detailFollowing.text =
+                            resources.getString(R.string.following, detailUser.following)
+                        detailUsername.text = detailUser.login
 
-                   }
+                    }
                     Glide.with(this@DetailUserActivity)
                         .load(detailUser.avatarUrl)
                         .into(binding.detailProfileImg)
@@ -140,17 +127,17 @@ class DetailUserActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
-           with(binding) {
+            with(binding) {
                 progressBar.visibility = View.VISIBLE
                 wrapHeading.visibility = View.GONE
                 binding.tabs.visibility = View.GONE
             }
         } else {
-           with(binding) {
-                    progressBar.visibility = View.GONE
-                    wrapHeading.visibility = View.VISIBLE
-                    binding.tabs.visibility = View.VISIBLE
-                }
+            with(binding) {
+                progressBar.visibility = View.GONE
+                wrapHeading.visibility = View.VISIBLE
+                binding.tabs.visibility = View.VISIBLE
+            }
 
         }
     }

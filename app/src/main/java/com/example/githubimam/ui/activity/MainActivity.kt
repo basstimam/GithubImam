@@ -3,31 +3,24 @@ package com.example.githubimam.ui.activity
 
 import android.content.Intent
 import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import androidx.lifecycle.viewModelScope
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubimam.MainAdapter
 import com.example.githubimam.R
-import com.example.githubimam.ui.viewmodel.MainViewModel
-
 import com.example.githubimam.data.response.ItemsItem
-
 import com.example.githubimam.databinding.ActivityMainBinding
 import com.example.githubimam.ui.settings.SettingPreferences
 import com.example.githubimam.ui.settings.ThemeViewmodel
 import com.example.githubimam.ui.settings.ViewModelFactory
 import com.example.githubimam.ui.settings.dataStore
-import com.google.android.material.switchmaterial.SwitchMaterial
+import com.example.githubimam.ui.viewmodel.MainViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,8 +28,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private val mainViewModel by viewModels<MainViewModel>()
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,11 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
-    private fun setupMain(){
+    private fun setupMain() {
         mainViewModel.githubUser.observe(this) { user ->
             if (user != null) {
 
@@ -72,10 +59,12 @@ class MainActivity : AppCompatActivity() {
         binding.rvUser.addItemDecoration(itemDecoration)
 
         val preferences = SettingPreferences.getInstance(application.dataStore)
-        val themeViewModel = ViewModelProvider(this, ViewModelFactory(preferences))[ThemeViewmodel::class.java]
+        val themeViewModel =
+            ViewModelProvider(this, ViewModelFactory(preferences))[ThemeViewmodel::class.java]
         themeViewModel.getThemeSetting().observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
 
 
             } else {
@@ -87,10 +76,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.searchBar.setOnMenuItemClickListener{
-                menuItem ->
-            when(menuItem.itemId){
-                R.id.menu_item_change_theme-> {
+        binding.searchBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_item_change_theme -> {
                     val isDarkModeActive = isDarkModeEnabled()
                     Log.d("MainActivity", "isDarkModeActive: $isDarkModeActive")
                     val newTheme = !isDarkModeActive
@@ -107,7 +95,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
-               else -> false
+
+                else -> false
             }
         }
 
@@ -126,18 +115,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
 
-
-
-
-
-
-
         }
 
 
-
     }
-
 
 
     private fun performSearch(query: String) {
@@ -146,9 +127,6 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.searchUser(query)
 
     }
-
-
-
 
 
     private fun setUserData(userData: List<ItemsItem>) {
@@ -167,16 +145,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setTheme(isDark: Boolean){
-         if (isDark){
+    private fun setTheme(isDark: Boolean) {
+        if (isDark) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        }else{
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
-
-
-
 
 
     }

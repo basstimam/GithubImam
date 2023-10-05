@@ -15,10 +15,10 @@ import com.example.githubimam.databinding.ItemUserBinding
 import com.example.githubimam.ui.activity.DetailUserActivity
 
 
-class MainAdapter : ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBACK){
+class MainAdapter : ListAdapter<ItemsItem, MainAdapter.ViewHolder>(DIFF_CALLBACK) {
 
 
-    private var onItemClickCallback: OnItemClickedCallback? = null
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,13 +27,12 @@ class MainAdapter : ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBAC
     }
 
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val users = getItem(position)
 
         holder.bind(users)
 
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
 
             val intent = Intent(holder.itemView.context, DetailUserActivity::class.java)
             val bundle = Bundle()
@@ -43,19 +42,15 @@ class MainAdapter : ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBAC
             holder.itemView.context.startActivity(intent)
 
 
-
         }
-
-
-
 
 
     }
 
-    class ViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(users: ItemsItem){
+        fun bind(users: ItemsItem) {
             binding.profileName.text = users.login
             Glide.with(itemView.context)
                 .load(users.avatarUrl)
@@ -64,8 +59,8 @@ class MainAdapter : ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBAC
         }
     }
 
-    companion object{
-        val DIFF_CALLBACK = object: DiffUtil.ItemCallback<ItemsItem>(){
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ItemsItem>() {
             override fun areItemsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
                 return oldItem == newItem
             }
@@ -80,12 +75,6 @@ class MainAdapter : ListAdapter<ItemsItem, MainAdapter.ViewHolder> (DIFF_CALLBAC
         const val AVATAR = "AVATAR"
     }
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickedCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
-    interface OnItemClickedCallback {
-        fun onItemClicked(data: ItemsItem)
-    }
 
 
 }

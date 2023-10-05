@@ -1,15 +1,12 @@
 package com.example.githubimam.ui.activity
 
 import FavoriteAdapter
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.app.githubuserapplication.view.ViewModelFactory
-import com.example.githubimam.R
-import com.example.githubimam.data.database.entity.FavoriteUserEntity
 import com.example.githubimam.databinding.ActivityFavoriteBinding
 import com.example.githubimam.ui.viewmodel.FavoriteViewmodel
 
@@ -24,7 +21,7 @@ class FavoriteActivity : AppCompatActivity() {
         ViewModelProvider(this, factory).get(FavoriteViewmodel::class.java)
     }
     private lateinit var favoriteAdapter: FavoriteAdapter
-    private var adapter = FavoriteAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityFavoriteBinding.inflate(layoutInflater)

@@ -19,6 +19,4 @@ data class FavoriteUserEntity(
     var avatar_url: String? = null,
 
 
-
-
     )

@@ -19,13 +19,11 @@ class FollowersFragment : Fragment() {
     private val followersAdapter = FollowersAdapter()
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding= FragmentFollowersBinding.inflate(inflater, container, false)
+        _binding = FragmentFollowersBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -35,19 +33,6 @@ class FollowersFragment : Fragment() {
         showLoading(true)
         setupRecyclerView()
         observeFollowers()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

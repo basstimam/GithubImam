@@ -7,7 +7,8 @@ import com.bumptech.glide.Glide
 import com.example.githubimam.data.response.FollowersResponseItem
 import com.example.githubimam.databinding.ItemUserBinding
 
-class FollowersAdapter : ListAdapter<FollowersResponseItem, FollowersAdapter.ViewHolder>(DIFF_CALLBACK) {
+class FollowersAdapter :
+    ListAdapter<FollowersResponseItem, FollowersAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,11 +32,17 @@ class FollowersAdapter : ListAdapter<FollowersResponseItem, FollowersAdapter.Vie
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FollowersResponseItem>() {
-            override fun areItemsTheSame(oldItem: FollowersResponseItem, newItem: FollowersResponseItem): Boolean {
+            override fun areItemsTheSame(
+                oldItem: FollowersResponseItem,
+                newItem: FollowersResponseItem
+            ): Boolean {
                 return oldItem.login == newItem.login
             }
 
-            override fun areContentsTheSame(oldItem: FollowersResponseItem, newItem: FollowersResponseItem): Boolean {
+            override fun areContentsTheSame(
+                oldItem: FollowersResponseItem,
+                newItem: FollowersResponseItem
+            ): Boolean {
                 return oldItem == newItem
             }
         }

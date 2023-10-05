@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.githubimam.data.response.FollowingResponseItem
 import com.example.githubimam.databinding.ItemUserBinding
 
-class FollowingAdapter :    ListAdapter<FollowingResponseItem, FollowingAdapter.ViewHolder>(
+class FollowingAdapter : ListAdapter<FollowingResponseItem, FollowingAdapter.ViewHolder>(
     DIFF_CALLBACK
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
