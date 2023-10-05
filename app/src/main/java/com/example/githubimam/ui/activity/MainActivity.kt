@@ -5,13 +5,14 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.CompoundButton
-
+import androidx.lifecycle.viewModelScope
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,13 +23,17 @@ import com.example.githubimam.ui.viewmodel.MainViewModel
 import com.example.githubimam.data.response.ItemsItem
 
 import com.example.githubimam.databinding.ActivityMainBinding
-
+import com.example.githubimam.ui.settings.SettingPreferences
+import com.example.githubimam.ui.settings.ThemeViewmodel
+import com.example.githubimam.ui.settings.ViewModelFactory
+import com.example.githubimam.ui.settings.dataStore
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-
+    private lateinit var settingPreferences: SettingPreferences
     private val mainViewModel by viewModels<MainViewModel>()
 
 
@@ -39,28 +44,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         showLoading(true)
         supportActionBar?.hide()
         setupMain()
-        setTheme()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -71,24 +57,46 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setupMain(){
-        mainViewModel.githubUser.observe(this, { user ->
+        mainViewModel.githubUser.observe(this) { user ->
             if (user != null) {
 
                 showLoading(false)
             }
 
             setUserData(user)
-        })
+        }
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
 
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvUser.addItemDecoration(itemDecoration)
 
+        val preferences = SettingPreferences.getInstance(application.dataStore)
+        val themeViewModel = ViewModelProvider(this, ViewModelFactory(preferences))[ThemeViewmodel::class.java]
+        themeViewModel.getThemeSetting().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+            }
+        }
+
+
+
+
         binding.searchBar.setOnMenuItemClickListener{
                 menuItem ->
             when(menuItem.itemId){
                 R.id.menu_item_change_theme-> {
+                    val isDarkModeActive = isDarkModeEnabled()
+                    Log.d("MainActivity", "isDarkModeActive: $isDarkModeActive")
+                    val newTheme = !isDarkModeActive
+                    setTheme(newTheme)
+                    themeViewModel.saveThemeSetting(newTheme)
+
 
                     true
                 }
@@ -159,8 +167,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setTheme(){
-        val searchBarEditText = binding.searchBar
+    private fun setTheme(isDark: Boolean){
+         if (isDark){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
 
 
 
